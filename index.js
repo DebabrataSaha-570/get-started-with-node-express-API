@@ -9,22 +9,37 @@ app.get('/', (req, res) => {
 
 const users = [
     { id: 0, name: 'Shabana', email: 'Shabana@gmail.com', phone: '0178888888' },
-    { id: 1, name: 'Shabnur', email: 'Shabnur@gmail.com', phone: '0178888889' },
+    { id: 1, name: 'Shabnoor', email: 'Shabnur@gmail.com', phone: '0178888889' },
     { id: 2, name: 'Srabonti', email: 'Srabonti@gmail.com', phone: '0178888882' },
     { id: 3, name: 'Suchorita', email: 'suchorita@gmail.com', phone: '0178888885' },
 ]
 
 app.get('/users', (req, res) => {
-    // res.send('my personal Users API')
-    // res.send({ id: 1, name: 'shabana', email: 'shabana@gmail.com' })
-    res.send(users)
+    // use query parameter 
+    console.log(req.query.search)
+    const search = req.query.search;
+    if (search) {
+        const searchResult = users.filter(user => user.name.toLowerCase().includes(search))
+        res.send(searchResult)
+    }
+    else {
+
+        res.send(users)
+    }
 })
+
+// dynamic api 
 
 app.get('/users/:id', (req, res) => {
     const id = req.params.id;
     const user = users[id];
     // console.log(req.params.id)
     res.send(user)
+})
+
+
+app.get('/fruits', (req, res) => {
+    res.send(['mango', 'oranges', 'banana', 'apple'])
 })
 
 app.get('/fruits/mangoes/fazlil', (req, res) => {
