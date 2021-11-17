@@ -31,6 +31,13 @@ app.get('/users', (req, res) => {
     }
 })
 
+// app METHOD
+app.post('/users', (req, res) => {
+    console.log('hitting the post ')
+    req.send('inside post')
+})
+
+
 // dynamic api 
 
 app.get('/users/:id', (req, res) => {
@@ -39,7 +46,6 @@ app.get('/users/:id', (req, res) => {
     // console.log(req.params.id)
     res.send(user)
 })
-
 
 app.get('/fruits', (req, res) => {
     res.send(['mango', 'oranges', 'banana', 'apple'])
