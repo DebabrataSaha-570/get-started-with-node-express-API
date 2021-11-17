@@ -5,6 +5,7 @@ const app = express()
 const port = process.env.PORT || 5000;
 
 app.use(cors())
+app.use(express.json())
 
 app.get('/', (req, res) => {
     res.send('wow I am excited to learn node and express')
@@ -33,8 +34,12 @@ app.get('/users', (req, res) => {
 
 // app METHOD
 app.post('/users', (req, res) => {
-    console.log('hitting the post ')
-    req.send('inside post')
+    const newUser = req.body;
+    newUser.id = users.length;
+    users.push(newUser)
+    console.log('hitting the post ', req.body)
+    // res.send(JSON.stringify(newUser))
+    res.json(newUser)
 })
 
 
